@@ -49,8 +49,8 @@ A popularidade recomenda **o mesmo ranking para todos os clientes**. O modelo pe
 ## Limitações e Próximos Passos
 
 - **3 produtos sem modelo:** `consorcio_imovel`, `titulo_capitalizacao` e `uso_lastro_limite` não tiveram contratações no período de treino. Para esses casos, aplica-se fallback por popularidade.
-- **Modelo linear:** Regressão Logística captura apenas relações lineares. Um GBM (LightGBM) ou modelo de aprendizado a partir de pares (LambdaMART) capturaria interações não-lineares e potencialmente aproximaria a vantagem da popularidade em NDCG enquanto mantém a personalização.
-- **Cold-start:** clientes novos sem histórico de interações dependem apenas de features demográficas. Solução: embedding colaborativo ou matrix factorization para inicialização.
+- **Modelo linear:** Regressão Logística captura apenas relações lineares. Um GBM (LightGBM) capturaria interações não-lineares e potencialmente aproximaria a vantagem da popularidade em NDCG enquanto mantém a personalização.
+- **Cold-start:** clientes novos sem histórico de interações dependem apenas de features demográficas.
 - **Epsilon fixo:** o valor ε = 10% é estático. Um **Upper Confidence Bound (UCB)** adaptativo ajustaria a exploração com base na incerteza do score por produto.
 - **Receita não otimizada diretamente:** o modelo maximiza P(contratação). Uma função objetivo que pondera probabilidade × margem (receita esperada) poderia ser mais alinhada ao objetivo de negócio.
-- **Retreino:** recomenda-se ciclo mensal com monitoramento de PSI (Population Stability Index) para detecção precoce de concept drift. Se CTR médio cair > 20%, aumentar epsilon temporariamente para 20%.
+- **Retreino:** recomenda-se ciclo mensal com monitoramento de PSI (Population Stability Index) para detecção precoce de concept drift.
